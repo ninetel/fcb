@@ -1,24 +1,44 @@
+
 {% extends 'base.html' %}
 
-{% block header %}
-  <h1>{% block title %}Posts{% endblock %}</h1>
- 
+{% block header %}<h1 id="dynamic_title">
+{% block title %} 
+{{tab_names}}
+{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-  {% for post in posts %}
-    <article class="post">
-      <header>
-        <div>
-          <h1>{{ post['title'] }}</h1>
-          <div class="about">  on {{ post['created'].strftime('%Y-%m-%d') }}</div>
-        </div>
-         
-      </header>
-      <p class="body">{{ post['body'] }}</p>
-    </article>
-    {% if not loop.last %}
-      <hr>
-    {% endif %}
-  {% endfor %}
+{% for post in posts %}
+<a href="/{{ post['id'] }}/display">
+  <article class="post">
+    <header>
+      <div>
+        <h1>{{ post['title'] }}</h1>
+        <div class="about"> on {{ post['created'].strftime('%Y-%m-%d') }}</div>
+      </div>
+
+    </header>
+    <p class="body">{{ post['body'] }}</p>
+  </article>
+</a>
+{% if not loop.last %}
+<hr>
+{% endif %}
+{% endfor %}
+<hr>
+<a href="/create" style="border: 1px solid black; text-decoration: none; width: 75px;">ADD BLOG</a>
+
+<!-- <script>
+  // var sum = 3;
+  // console.log(sum);
+  // document.addEventListener('DOMContentLoaded', function () { 
+    
+  //   const dynamicTitle = document.getElementById('dynamic_title');
+  //   dynamicTitle.innerHTML = process.env.FLASK_ADD;
+  //   alert("process.env.ADD");
+  //   });
+  document.getElementById("dynamic_title").innerHTML=process.env.FLASK_ADD
+  console.log(process.env.FLASK_ADD)
+</script> -->
 {% endblock %}
+

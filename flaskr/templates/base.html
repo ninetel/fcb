@@ -1,15 +1,18 @@
 <!doctype html>
-<title>{% block title %}{% endblock %} - Flaskr</title>
+<title>{% block title %} {% endblock %} </title>
+<!-- <link rel="stylesheet" href="https://pyscript.net/releases/2022.12.1/pyscript.css" />
+<script defer src="https://pyscript.net/releases/2022.12.1/pyscript.js"></script> -->
+
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <nav>
-  <h1>Flaskr</h1>
+  <h1>BLOG</h1>
   <ul>
     <!-- {% if g.user %}
       <li><span>{{ g.user['username'] }}</span>
    
     {% else %} -->
      
-    {% endif %}
+    <!-- {% endif %} -->
   </ul>
 </nav>
 <section class="content">
@@ -20,4 +23,4 @@
     <div class="flash">{{ message }}</div>
   {% endfor %}
   {% block content %}{% endblock %}
-</section>
+</section> 

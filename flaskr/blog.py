@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, redirect, render_template, request, url_for, current_app
+from flask import Blueprint, abort, flash, redirect, render_template, request, url_for, current_app
 from flaskr.db import get_db 
 import os
 
@@ -13,7 +13,8 @@ def index():
         ' FROM post p '
         ' ORDER BY created DESC'
     ).fetchall()
-    return render_template('blog/index.html', posts=posts)
+     
+    return render_template('blog/index.html', posts=posts,tab_names='Home')
 A = os.getenv('FLASK_ADD')
 print(os.getenv('FLASK_ADD')  )
 print("00")
@@ -40,4 +41,23 @@ def create():
             db.commit()
             return redirect(url_for('blog.index'))
 
-    return render_template('blog/create.html')
+    return render_template('blog/create.html',tab_names="Create")
+
+ 
+@bp.route('/<int:id>/display', methods=('GET', 'POST'))
+def get_post(id ):
+    post = get_db().execute(
+        'SELECT p.id, title, body, created '
+        ' FROM post p  '
+        ' WHERE p.id = ?',
+        (id,)
+    ).fetchone()
+    
+
+   
+
+    if post is None:
+        abort(404, f"Post id {id} doesn't exist.")
+    else:
+        return render_template('blog/display.html', post=post,tab_names="View")    
+ 

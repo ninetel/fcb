@@ -1,6 +1,7 @@
 import os
+from dotenv import load_dotenv
 
-from flask import Flask
+from flask import Flask, render_template
 
 
 def create_app(test_config=None):
@@ -11,6 +12,9 @@ def create_app(test_config=None):
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     )
     app.config.from_prefixed_env()
+    
+    load_dotenv()
+ 
     A=(app.config['ADD'])
     print(A)
     print("o1")
@@ -36,9 +40,19 @@ def create_app(test_config=None):
     app.add_url_rule('/', endpoint='index')
 
  
-    # a simple page that says hello
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World!'
+    # # a simple page that says hello
+    # @app.route('/hello')
+    # def hello():
+    #     return 'Hello, World!'
+    # @app.route('/')
+    # def index():
+    #     dtitle = 'Home Page'
+    #     return render_template('index.html', dtitle=dtitle)
 
     return app
+
+
+
+
+
+ 
