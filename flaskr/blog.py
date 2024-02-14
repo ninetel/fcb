@@ -14,7 +14,7 @@ def index():
         ' ORDER BY created DESC'
     ).fetchall()
      
-    return render_template('blog/index.html', posts=posts,tab_names='Home')
+    return render_template('blog/index.html', posts=posts,tab_names='Home',website_name='BLOG')
 A = os.getenv('FLASK_ADD')
 print(os.getenv('FLASK_ADD')  )
 print("00")
