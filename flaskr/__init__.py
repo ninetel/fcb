@@ -18,6 +18,7 @@ def create_app(test_config=None):
     A=(app.config['ADD'])
     print(A)
     print("o1")
+    
  
     if test_config is None:
         # load the instance config, if it exists, when not testing

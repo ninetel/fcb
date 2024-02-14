@@ -3,7 +3,10 @@ from flaskr.db import get_db
 import os
 
 bp = Blueprint('blog', __name__)
-
+@bp.context_processor
+def utility_processor():
+    
+    return dict(website_name="BLOG")
 @bp.route('/')
 def index():
   
@@ -14,7 +17,7 @@ def index():
         ' ORDER BY created DESC'
     ).fetchall()
      
-    return render_template('blog/index.html', posts=posts,tab_names='Home',website_name='BLOG')
+    return render_template('blog/index.html', posts=posts,tab_names='Home' )
 A = os.getenv('FLASK_ADD')
 print(os.getenv('FLASK_ADD')  )
 print("00")
@@ -41,7 +44,7 @@ def create():
             db.commit()
             return redirect(url_for('blog.index'))
 
-    return render_template('blog/create.html',tab_names="Create")
+    return render_template('blog/create.html',tab_names="Create" )
 
  
 @bp.route('/<int:id>/display', methods=('GET', 'POST'))
@@ -59,5 +62,5 @@ def get_post(id ):
     if post is None:
         abort(404, f"Post id {id} doesn't exist.")
     else:
-        return render_template('blog/display.html', post=post,tab_names="View")    
+        return render_template('blog/display.html', post=post,tab_names="View" )    
  
